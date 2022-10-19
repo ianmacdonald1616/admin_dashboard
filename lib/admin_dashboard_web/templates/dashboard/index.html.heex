@@ -6,7 +6,7 @@
 
     <div class="options-and-filters">
       <div class="create-options">
-        <.link patch={Routes.dashboard_index_path(@socket, :new_email)} class="new-btn new-email">Create New Email</.link>
+        <.link patch={Routes.dashboard_index_path(@socket, :new_email)} class="new-btn new-email">Create Email</.link>
         <.link patch={Routes.dashboard_index_path(@socket, :new_user)} class="new-btn new-user">Create User</.link>
       </div>
 
@@ -18,7 +18,8 @@
 
         <form class="search-form" phx-change="search" phx-submit="search" data-toggle="tooltip" title="Search email subject and body.">
           <%= label :search, :text, "Search:" %>
-          <%= text_input :search, :text, value: @search_text, autocomplete: "off", phx_debounce: "350" %>
+          <%= text_input :search, :text, value: @search_text, placeholder: "filter by", autocomplete: "off", phx_debounce: "350" %>
+          <i class="clear-filter fa fa-times" phx-click="clear-search"></i>
         </form>
       </div>
     </div>

@@ -62,6 +62,16 @@ defmodule AdminDashboardWeb.DashboardLive.Index do
     {:noreply, socket}
   end
 
+  @impl true
+  def handle_event("clear-search", _params, socket) do
+    socket =
+      socket
+      |> assign(:search_text, "")
+      |> assign_sent_emails()
+
+    {:noreply, socket}
+  end
+
   defp assign_sent_emails(socket) do
     %{user_scope: user_scope, search_text: search_text, sort_by: sort_by, sort_order: sort_order} = socket.assigns
     assign(socket, :sent_emails, SentEmails.get_sent_emails(user_scope, search_text, sort_by, sort_order))

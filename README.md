@@ -8,12 +8,15 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+## Details
 
-## Learn more
+The dashboard displays a "sent_emails" table that can be sorted and filtered, containing:
+  * User - email's creator & sender
+  * To - email recipient's email address
+  * Sent At - time the email was sent at ("created")
+  * Subject - email's subject line
+  * Body - email's body
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+New emails and users can be created with the New Email & New User Modals.
+  * Creating new users or emails does not affect table sort and filter selections.
+  * New emails will automatically be inserted into the table in the appropriate position.

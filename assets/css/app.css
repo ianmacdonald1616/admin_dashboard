@@ -175,6 +175,22 @@
   margin-left: 2rem;
 }
 
+input#search_text:placeholder-shown + .clear-filter {
+  color: black;
+  opacity: 0.3;
+}
+
+.clear-filter {
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: red;
+
+  position: relative;
+  right: 15px;
+  top: 3px;
+  z-index: 3;
+}
+
 /* email table styling */
 .sorting-icon {
   margin-left: 1rem;
