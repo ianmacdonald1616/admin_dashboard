@@ -161,21 +161,21 @@
   justify-content: space-between;
 }
 
-.user-filter, .search-form {
+.user-filter, .search-filter {
   white-space: nowrap;
   display: flex;
   align-items: baseline;
 }
 
-.user-filter select, .search-form input {
+.user-filter select, .search-filter input {
   margin-left: 1rem;
 }
 
-.search-form {
+.search-filter {
   margin-left: 2rem;
 }
 
-input#search_text:placeholder-shown + .clear-filter {
+input#filter_text:placeholder-shown + .clear-filter {
   color: black;
   opacity: 0.3;
 }

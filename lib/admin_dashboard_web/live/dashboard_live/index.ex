@@ -43,19 +43,10 @@ defmodule AdminDashboardWeb.DashboardLive.Index do
   end
 
   @impl true
-  def handle_event("filter", %{"filter" => %{"user_id" => user_id}}, socket) do
+  def handle_event("filter", %{"filter" => %{"user_id" => user_id, "text" => search_text}}, socket) do
     socket =
       socket
       |> assign(:user_scope, user_id)
-      |> assign_sent_emails()
-
-    {:noreply, socket}
-  end
-
-  @impl true
-  def handle_event("search", %{"search" => %{"text" => search_text}}, socket) do
-    socket =
-      socket
       |> assign(:search_text, search_text)
       |> assign_sent_emails()
 

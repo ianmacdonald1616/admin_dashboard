@@ -10,18 +10,20 @@
         <.link patch={Routes.dashboard_index_path(@socket, :new_user)} class="new-btn new-user">Create User</.link>
       </div>
 
-      <div class="filters">
-        <form class="user-filter" phx-change="filter" phx-submit="filter">
-          <%= label :filter, :user_id, "Filter user:", class: "filter-label" %>
-          <%= select :filter, :user_id, format_sender_options(@available_users), prompt: "Any", selected: @user_scope %>
-        </form>
+      <form class="email-filters" phx-change="filter" phx-submit="filter">
+        <div class="filters">
+          <div class="user-filter">
+            <%= label :filter, :user_id, "Filter user:", class: "filter-label" %>
+            <%= select :filter, :user_id, format_sender_options(@available_users), prompt: "Any", selected: @user_scope %>
+          </div>
 
-        <form class="search-form" phx-change="search" phx-submit="search" data-toggle="tooltip" title="Search email subject and body.">
-          <%= label :search, :text, "Search:" %>
-          <%= text_input :search, :text, value: @search_text, placeholder: "filter by", autocomplete: "off", phx_debounce: "350" %>
-          <i class="clear-filter fa fa-times" phx-click="clear-search"></i>
-        </form>
-      </div>
+          <div class="search-filter">
+            <%= label :filter, :text, "Search:" %>
+            <%= text_input :filter, :text, value: @search_text, placeholder: "filter by", autocomplete: "off", phx_debounce: "350" %>
+            <i class="clear-filter fa fa-times" phx-click="clear-search"></i>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 
