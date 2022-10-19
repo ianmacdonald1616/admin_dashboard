@@ -1,0 +1,75 @@
+<div class="dashboard-main">
+  <div class="header-bar">
+    <div class="dashboard-title">
+      Sent Emails Dashboard
+    </div>
+
+    <div class="options-and-filters">
+      <div class="create-options">
+        <.link patch={Routes.dashboard_index_path(@socket, :new_email)} class="new-btn new-email">Create New Email</.link>
+        <.link patch={Routes.dashboard_index_path(@socket, :new_user)} class="new-btn new-user">Create User</.link>
+      </div>
+
+      <div class="filters">
+        <form class="user-filter" phx-change="filter" phx-submit="filter">
+          <%= label :filter, :user_id, "Filter user:", class: "filter-label" %>
+          <%= select :filter, :user_id, format_sender_options(@available_users), prompt: "Any", selected: @user_scope %>
+        </form>
+
+        <form class="search-form" phx-change="search" phx-submit="search" data-toggle="tooltip" title="Search email subject and body.">
+          <%= label :search, :text, "Search:" %>
+          <%= text_input :search, :text, value: @search_text, autocomplete: "off", phx_debounce: "350" %>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="sent-email-div">
+    <table class="email-table">
+      <colgroup>
+        <col span="1" style="width: 10%;">
+        <col span="1" style="width: 10%;">
+        <col span="1" style="width: 15%;">
+        <col span="1" style="width: 30%;">
+        <col span="1" style="width: 35%;">
+      </colgroup>
+
+      <thead>
+        <tr class="header-row">
+          <th><span style="margin-left: 2rem;"><.table_sort_link link_value="user_name" link_text="User" {assigns} /></span></th>
+          <th><.table_sort_link link_value="to" link_text="Recipient" {assigns} /></th>
+          <th><.table_sort_link link_value="inserted_at" link_text="Sent At" {assigns} /></th>
+          <th><.table_sort_link link_value="subject" link_text="Subject" {assigns} /></th>
+          <th><.table_sort_link link_value="body" link_text="Body" {assigns} /></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <%= for email <- @sent_emails do %>
+          <tr class="email-row">
+            <td><span class="sender-name"><%= email.user.name %></span></td>
+            <td><%= email.to %></td>
+            <td><%= email.inserted_at %></td>
+            <td><%= email.subject %></td>
+            <td><%= email.body %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%= if @live_action == :new_email do %>
+  <%= live_modal AdminDashboardWeb.DashboardLive.NewEmail,
+    id: "sent-email-new-dialog",
+    available_users: @available_users,
+    return_to: Routes.dashboard_index_path(@socket, :index)
+  %>
+<% end %>
+
+<%= if @live_action == :new_user do %>
+  <%= live_modal AdminDashboardWeb.DashboardLive.NewUser,
+    id: "new-user-dialog",
+    return_to: Routes.dashboard_index_path(@socket, :index)
+  %>
+<% end %>

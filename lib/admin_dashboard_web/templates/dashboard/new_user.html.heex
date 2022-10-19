@@ -1,0 +1,30 @@
+<div class="show-new-user-modal">
+  <div class="modal-header">
+    Add new user
+  </div>
+
+  <div class="modal-body">
+    <.form :let={f}
+            for={@changeset}
+            id="new-user-form"
+            phx_submit="create-user"
+            phx_change="validate-user"
+            phx_target={@myself}
+    >
+
+      <div>
+        <%= label f, :name %>
+        <%= text_input f, :name, autocomplete: "off", phx_debounce: "250" %>
+        <%= AdminDashboardWeb.ErrorHelpers.error_tag(f, :name) %>
+      </div>
+
+      <div>
+        <%= label f, :email %>
+        <%= text_input f, :email, autocomplete: "off", phx_debounce: "250" %>
+        <%= AdminDashboardWeb.ErrorHelpers.error_tag(f, :email) %>
+      </div>
+
+      <.modal_buttons id={:modal} />
+    </.form>
+  </div>
+</div>

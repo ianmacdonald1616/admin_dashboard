@@ -1,0 +1,43 @@
+<div class="show-new-email-modal">
+  <div class="modal-header">
+    Create a new email
+  </div>
+
+  <div class="modal-body">
+    <.form :let={f}
+            for={@changeset}
+            id="new-email-form"
+            phx_submit="create-email"
+            phx_change="validate-email"
+            phx_target={@myself}
+    >
+      <div class="form-group">
+        <div class="new-email-sender">
+          <%= label f, :user_id, "User" %>
+          <%= select f, :user_id, format_sender_options(@available_users), prompt: "No one" %>
+          <%= AdminDashboardWeb.ErrorHelpers.error_tag(f, :user_id) %>
+        </div>
+
+        <div class="new-email-recipient">
+          <%= label f, :to, "Recipient Email" %>
+          <%= email_input f, :to, autocomplete: "off", phx_debounce: "350" %>
+          <%= AdminDashboardWeb.ErrorHelpers.error_tag(f, :to) %>
+        </div>
+      </div>
+
+      <div>
+        <%= label f, :subject %>
+        <%= textarea f, :subject, phx_debounce: "350" %>
+        <%= AdminDashboardWeb.ErrorHelpers.error_tag(f, :subject) %>
+      </div>
+
+      <div>
+        <%= label f, :body %>
+        <%= textarea f, :body, phx_debounce: "350" %>
+        <%= AdminDashboardWeb.ErrorHelpers.error_tag(f, :body) %>
+      </div>
+
+      <.modal_buttons id={:modal} />
+    </.form>
+  </div>
+</div>
